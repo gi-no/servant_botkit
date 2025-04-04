@@ -2,6 +2,7 @@
   "name": "servant_botkit",
   "version": "2.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "git@github.com:yukimura1227/servant_botkit.git",
   "author": "yukimura1227 <takamura1227@gmail.com>",
   "license": "MIT",

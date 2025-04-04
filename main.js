@@ -1,4 +1,4 @@
-import { App } from '@slack/bolt';
+import bolt from '@slack/bolt';
 import http from 'http';
 
 const { request } = http;
@@ -10,7 +10,7 @@ if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLAC
   process.exit(1);
 }
 
-const app = new App({
+const app = new bolt.App({
   token: process.env.TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 });

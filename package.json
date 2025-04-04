@@ -1,12 +1,11 @@
 {
   "name": "servant_botkit",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "index.js",
   "repository": "git@github.com:yukimura1227/servant_botkit.git",
   "author": "yukimura1227 <takamura1227@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "botkit": "0.7.4",
-    "date-utils": "^1.2.21"
+    "@slack/bolt": "^4.2.1"
   }
 }

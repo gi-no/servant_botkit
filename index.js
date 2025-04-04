@@ -1,3 +1,4 @@
+// この実装は利用していません。新しい実装(main.js)を利用しています。
 const Botkit    = require('botkit');
 const request   = require('request');
 require('date-utils');

@@ -9,7 +9,8 @@ yarn
 ```
 export SLACK_TEAM=<your slack team name here>
 export TOKEN=<your slack team name here>
-node index.js
+export SLACK_SIGNING_SECRET=<your slack signing secret>
+node main.js
 ```
 
 ### Required environment variables
@@ -18,6 +19,8 @@ node index.js
 SLACK_TEAM
 # SLACK_API_TOKEN
 TOEKN
+# SLACK_SIGNING_SECRET
+SLACK_SIGNING_SECRET
 ```
 
 ## Deploy to heroku
@@ -28,6 +31,7 @@ heroku login
 heroku create servant-botkit
 heroku config:set SLACK_TEAM=[your team name]
 heroku config:set TOKEN=[your token]
+heroku config:set SLACK_SIGNING_SECRET=[your slack signing secret>]
 heroku config:set TRELLO_KEY=[your token]
 heroku config:set TRELLO_TOKEN=[your token]
 heroku config:set TRELLO_UI_NOTE=[your token]

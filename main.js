@@ -56,11 +56,6 @@ app.message(async ({ message, client }) => {
       repostTo(`#日報_${matcher[1]}`, client, postLink, message);
       repostTo('#日報_all', client, postLink, message);
     }
-
-    // ui_notesチャンネルの処理
-    if (channelName.match('ui_notes')) {
-      await handleUiNotes(client, message);
-    }
   } catch (error) {
     console.error(`Error processing message: ${error}`);
   }
@@ -97,55 +92,6 @@ async function sortExceptionIntoAppropriateChannel(client, postLink, message) {
   }
   
   repostTo(`#exceptions_${repostToTargetChannelPostfix}`, client, postLink, message);
-}
-
-// ui_notesチャンネルの処理
-async function handleUiNotes(client, message) {
-  const key = process.env.TRELLO_KEY;
-  const token = process.env.TRELLO_TOKEN;
-  // const ui_note = process.env.TRELLO_UI_NOTE;
-  const listNewId = process.env.TRELLO_LIST_NEW_ID;
-  
-  const keywordMatcher = '^title:.*';
-  const titleMatcher = '^title:([^\n]*)';
-  const dt = new Date();
-  const postedAt = '### 投稿日\n' + dt.toFormat("YYYY/MM/DD/ HH24:MI") + '\n';
-  const msgUrl = '### Slack URL\nhttps://paiza.slack.com/archives/' + message.channel + '/p' + message.ts.replace('.', '') + '\n';
-  const msg = message.text;
-  const trelloBody = '###概要\n' + message.text.replace(/^title:/g, '') + '\n';
-  let imgUrl = '';
-
-  if (msg.match(keywordMatcher)) {
-    if (message.files && message.files.length > 0) {
-      imgUrl = '### 画像URL\n' + message.files[0].url_private + '\n';
-    }
-
-    const hashtag = '#' + dt.toFormat("YYYY年MM月") + '報告分';
-    const title = encodeURIComponent(msg.match(titleMatcher)[1] + hashtag);
-    const desc = encodeURIComponent(trelloBody + msgUrl + postedAt + imgUrl);
-    const url = `https://trello.com/1/cards?key=${key}&token=${token}&idList=${listNewId}&name=${title}&desc=${desc}`;
-
-    try {
-      request.post({
-        url: url,
-        headers: {
-          "content-type": "application/json"
-        }
-      }, function (error, response, body) {
-        if (error) {
-          console.error(`Error posting to Trello: ${error}`);
-        }
-      });
-
-      await client.chat.postMessage({
-        text: "uiチームのタスクに登録されました。随時取り掛かります。\nhttps://trello.com/b/jrmkblAB/uinotes",
-        channel: message.channel,
-        thread_ts: message.ts
-      });
-    } catch (error) {
-      console.error(`Error handling UI notes: ${error}`);
-    }
-  }
 }
 
 // アプリの起動

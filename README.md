@@ -32,10 +32,6 @@ heroku create servant-botkit
 heroku config:set SLACK_TEAM=[your team name]
 heroku config:set TOKEN=[your token]
 heroku config:set SLACK_SIGNING_SECRET=[your slack signing secret>]
-heroku config:set TRELLO_KEY=[your token]
-heroku config:set TRELLO_TOKEN=[your token]
-heroku config:set TRELLO_UI_NOTE=[your token]
-heroku config:set TRELLO_LIST_NEW_ID=[your token]
 ```
 
 ### heroku config

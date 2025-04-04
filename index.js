@@ -28,16 +28,8 @@ controller.spawn({
 });
 
 const hearing_event_all            = ['ambient'];
-const hearing_event_mention        = ['direct_mention', 'mention'];
-const hearing_event_direct_message = ['direct_message'];
-
-controller.hears('hi', hearing_event_mention, function(bot,message) {
-  bot.reply(message,'hi');
-});
-
-controller.hears('remote', ['direct_mention'], function(bot, message) {
-  bot.reply(message, "<!channel> 本日リモートありなので、*今日やろうと思っていること*と、*実際にやったこと*を、このメッセージのスレッドに返信する形で共有しませう");
-});
+// const hearing_event_mention        = ['direct_mention', 'mention'];
+// const hearing_event_direct_message = ['direct_message'];
 
 controller.hears('', hearing_event_all, function(bot,message) {
   // console.log(bot);

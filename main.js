@@ -96,7 +96,7 @@ async function sortExceptionIntoAppropriateChannel(client, postLink, message) {
     repostToTargetChannelPostfix = 'games';
   }
   
-  repostTo(`#exceptions_${repost_to_target_channel_postfix}`, client, postLink, message);
+  repostTo(`#exceptions_${repostToTargetChannelPostfix}`, client, postLink, message);
 }
 
 // ui_notesチャンネルの処理

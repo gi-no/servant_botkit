@@ -3,7 +3,7 @@ import http from 'http';
 
 const { request } = http;
 
-if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLACK_TEAM ) {
+if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLACK_TEAM || !process.env.SLACK_APP_TOKEN) {
   console.log('Error: Specify TOKEN in environment');
   console.log('or Error: Specify SLACK_SIGNING_SECRET in environment');
   console.log('or Error: Specify SLACK_TEAM in environment');
@@ -13,6 +13,12 @@ if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLAC
 const app = new App({
   token: process.env.TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  /* 
+    NOTE: socketModeを使うため、SLACK_APP_TOKENを指定し、socketModeを有効にする
+    丁寧にEventをSubscribeする場合は、socketModeをfalseにできる
+  */
+  socketMode: true,
+  appToken: process.env.SLACK_APP_TOKEN,
 });
 
 app.message(async ({ message, client }) => {

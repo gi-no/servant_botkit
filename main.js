@@ -22,10 +22,11 @@ app.message(async ({ message, client }) => {
 
   const channelId = message.channel;
   const eventTs = message.ts;
-  const postLink = app.client.chat.getPermalink({
+  const chatGetPermalinkResponse = await app.client.chat.getPermalink({
     channel: channelId,
     message_ts: eventTs
   });
+  const postLink = chatGetPermalinkResponse.permalink;
 
   try {
     // チャンネル情報の取得

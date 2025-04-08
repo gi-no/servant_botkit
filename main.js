@@ -1,7 +1,4 @@
 import bolt from '@slack/bolt';
-import http from 'http';
-
-const { request } = http;
 
 if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLACK_TEAM ) {
   console.log('Error: Specify TOKEN in environment');
@@ -23,11 +20,12 @@ app.message(async ({ message, client }) => {
     return;
   }
 
-  const slackTeam = process.env.SLACK_TEAM;
   const channelId = message.channel;
   const eventTs = message.ts;
-  const formattedTs = eventTs.replace('.', '');
-  const postLink = `https://${slackTeam}.slack.com/archives/${channelId}/p${formattedTs}`;
+  const postLink = app.client.chat.getPermalink({
+    channel: channelId,
+    message_ts: eventTs
+  });
 
   try {
     // チャンネル情報の取得

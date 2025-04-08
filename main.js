@@ -1,7 +1,4 @@
 import bolt from '@slack/bolt';
-import http from 'http';
-
-const { request } = http;
 
 if (!process.env.TOKEN || !process.env.SLACK_SIGNING_SECRET || !process.env.SLACK_TEAM ) {
   console.log('Error: Specify TOKEN in environment');
